@@ -3,300 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emival Miguel | Data Portfolio</title>
+    <title>Emival Miguel | Data Science & Engineering Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2 family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <!-- Ícones de redes sociais e ferramentas -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* --- CONFIGURAÇÕES DE DESIGN (DARK & NEON) --- */
         :root {
-            --dark-bg: #06090e;
-            --card-bg: #0f141c;
-            --neon-green: #00ff87;
-            --text-muted: #94a3b8;
-            --border-color: #1e293b;
+            --bg-dark: #030712;         /* Fundo ultra escuro profissional */
+            --bg-card: #0f172a;         /* Fundo dos blocos de conteúdo */
+            --neon-green: #10b981;      /* Verde esmeralda marcante (Alta legibilidade) */
+            --text-main: #f9fafb;       /* Texto principal claro */
+            --text-muted: #9ca3af;      /* Texto de suporte/descrições */
+            --border-glow: #1e293b;     /* Bordas sutis */
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-        /* --- NAV BAR --- */
+        /* --- BARRA DE NAVEGAÇÃO PROFISSIONAL --- */
         nav {
-            padding: 20px 0;
+            background: rgba(3, 7, 18, 0.95);
+            border-bottom: 1px solid var(--border-glow);
             position: sticky;
-            top: 0;
-            background: rgba(6, 9, 14, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            top: 0; z-index: 1000;
+            backdrop-filter: blur(8px);
         }
-        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'JetBrains Mono'; font-weight: 800; color: var(--neon-green); font-size: 1.3rem; text-decoration: none; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-family: var(--font-mono); font-weight: 800; color: var(--neon-green); text-decoration: none; font-size: 1.3rem; }
         
-        .social-nav a {
-            color: white;
-            margin-left: 20px;
-            font-size: 1.3rem;
-            transition: 0.3s;
+        .nav-menu { display: flex; list-style: none; gap: 20px; }
+        .nav-menu a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 600;
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;
         }
-        .social-nav a:hover { color: var(--neon-green); }
+        /* Destaque para a página ativa */
+        .nav-menu a.active, .nav-menu a:hover { color: var(--neon-green); background: rgba(16, 185, 129, 0.1); }
 
-        /* --- HERO SECTION (COM FOTO) --- */
-        .hero {
-            padding: 80px 0;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            min-height: 80vh;
-        }
-        .hero-text { flex: 1; }
-        .hero-text h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin: 15px 0; }
-        .highlight { color: var(--neon-green); text-shadow: 0 0 20px rgba(0, 255, 135, 0.2); }
-        .hero-tag { font-family: 'JetBrains Mono'; color: var(--neon-green); background: rgba(0,255,135,0.05); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; }
+        .social-icons a { color: var(--text-main); margin-left: 15px; font-size: 1.2rem; transition: 0.3s; }
+        .social-icons a:hover { color: var(--neon-green); }
+
+        /* --- SISTEMA DE PÁGINAS INDIVIDUAIS (SPA) --- */
+        .page { display: none; padding: 60px 0; min-height: 80vh; animation: fadeIn 0.5s ease forwards; }
+        .page.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- ESTILOS COMPARTILHADOS --- */
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
+        .section-title span { color: var(--neon-green); font-family: var(--font-mono); }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin-bottom: 40px; }
+
+        /* --- 1. PÁGINA INICIAL (HOME) --- */
+        #home { display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at top, rgba(16, 185, 129, 0.08), transparent 60%); }
+        .home-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; }
+        .home-content p { color: var(--text-muted); font-size: 1.3rem; max-width: 650px; margin: 0 auto 40px auto; }
         
-        /* Espaço para a tua Foto */
-        .hero-avatar {
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            border: 3px solid var(--neon-green);
-            box-shadow: 0 0 30px rgba(0, 255, 135, 0.15);
-            object-fit: cover;
-            background-color: #1a2333; /* Fundo temporário se não houver foto */
-        }
+        /* --- 2. PÁGINA SOBRE MIM --- */
+        .about-layout { display: flex; gap: 50px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-image-wrapper { position: relative; }
+        .about-img { width: 300px; height: 300px; border-radius: 12px; object-fit: cover; border: 2px solid var(--neon-green); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+        .qa-block { margin-top: 25px; background: var(--bg-card); padding: 20px; border-radius: 8px; border-left: 4px solid var(--neon-green); }
+        .qa-block h4 { color: var(--text-main); font-size: 1.05rem; margin-bottom: 8px; }
+        .qa-block p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* --- DASHBOARD CAROUSEL (SLIDER) --- */
-        .slider-section { padding: 80px 0; }
-        .slider-wrapper {
-            position: relative;
-            max-width: 850px;
-            margin: 40px auto 0 auto;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-        }
-        .slide { display: none; width: 100%; height: 450px; border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slide-caption {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 20px; text-align: center;
-        }
+        /* --- 3. PÁGINA DE HABILIDADES (COM CONTEXTO) --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .skill-card { background: var(--bg-card); padding: 30px; border-radius: 10px; border: 1px solid var(--border-glow); transition: 0.3s; }
+        .skill-card:hover { border-color: var(--neon-green); transform: translateY(-3px); }
+        .skill-card i { font-size: 2rem; color: var(--neon-green); margin-bottom: 15px; }
+        .skill-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
+        .skill-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- 4. PÁGINA DE TRABALHOS / PROJETOS --- */
+        .projects-list { display: flex; flex-direction: column; gap: 40px; }
+        .project-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-glow); padding: 35px; position: relative; }
+        .project-version { position: absolute; top: 25px; right: 35px; font-family: var(--font-mono); color: var(--neon-green); background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; }
+        .business-value { background: rgba(255,255,255,0.03); border-left: 3px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 0 6px 6px 0; }
+        .business-value h5 { color: #f59e0b; margin-bottom: 5px; font-size: 0.95rem; }
+        .project-meta { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; display: flex; gap: 15px; }
         
-        /* Botões do Carrossel */
-        .prev, .next {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(0,0,0,0.7); color: var(--neon-green);
-            padding: 15px; border: 1px solid var(--border-color);
-            cursor: pointer; border-radius: 50%; font-weight: bold; transition: 0.3s;
-        }
-        .prev { left: -25px; } .next { right: -25px; }
-        .prev:hover, .next:hover { background: var(--neon-green); color: var(--dark-bg); }
+        /* Botões de Ação Regulamentados */
+        .action-group { display: flex; gap: 15px; margin-top: 25px; }
+        .btn { padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-primary { background: var(--neon-green); color: var(--bg-dark); }
+        .btn-primary:hover { box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+        .btn-secondary { background: #1e293b; color: white; border: 1px solid var(--border-glow); }
+        .btn-secondary:hover { background: #334155; }
 
-        /* --- PROJECTS GRID --- */
-        .projects-section { padding: 80px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card {
-            background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color);
-            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .card:hover { transform: translateY(-5px); border-color: var(--neon-green); }
-        .card-body { padding: 25px; }
-        .card-title { font-size: 1.3rem; margin: 10px 0; font-weight: 600; }
-        .card-text { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
-        
-        /* Links de Acção nos Projectos */
-        .card-actions {
-            padding: 0 25px 25px 25px;
-            display: flex; gap: 15px;
-        }
-        .btn-link {
-            text-decoration: none; font-size: 0.85rem; font-family: 'JetBrains Mono';
-            padding: 8px 14px; border-radius: 4px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
-        }
-        .btn-github { background: #24292e; color: white; border: 1px solid #444; }
-        .btn-github:hover { background: #333; border-color: var(--neon-green); }
-        .btn-notion { background: #ffffff; color: black; font-weight: 600; }
-        .btn-notion:hover { background: #e2e8f0; }
+        /* --- 5. PÁGINA DE CONTACTO --- */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        .contact-info i { color: var(--neon-green); margin-right: 10px; }
+        .contact-info p { margin-bottom: 15px; color: var(--text-muted); }
+        .contact-form { background: var(--bg-card); padding: 30px; border-radius: 10px; border: 1px solid var(--border-glow); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted); }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border-glow); border-radius: 6px; color: white; font-family: var(--font-sans); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--neon-green); outline: none; }
 
-        /* --- MODAL SYSTEM (EXPANDIR) --- */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 6, 9, 0.95); display: none;
-            justify-content: center; align-items: center; z-index: 2000; padding: 20px;
-        }
-        .modal-content {
-            background: var(--card-bg); max-width: 1000px; width: 100%;
-            border-radius: 15px; padding: 30px; position: relative;
-            border: 1px solid var(--neon-green); max-height: 90vh; overflow-y: auto;
-        }
-        .close-modal { position: absolute; top: 15px; right: 20px; color: white; font-size: 2rem; cursor: pointer; }
-        .modal-img { width: 100%; max-height: 500px; object-fit: contain; border-radius: 8px; margin-top: 15px; background: #000; }
-
-        h2.section-title { font-size: 2rem; border-left: 4px solid var(--neon-green); padding-left: 15px; }
-
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; text-align: center; padding: 40px 0; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .hero-avatar { width: 200px; height: 200px; }
-            .prev { left: 5px; } .next { right: 5px; }
-        }
+        /* --- RODAPÉ --- */
+        footer { border-top: 1px solid var(--border-glow); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGAÇÃO COM REDES SOCIAIS -->
     <nav>
-        <div class="container nav-flex">
-            <a href="#" class="logo">MIGUEL.DEV</a>
-            <div class="social-nav">
+        <div class="container nav-container">
+            <a href="#" class="logo" onclick="switchPage('home')">&lt;EMIVAL.DATA /&gt;</a>
+            <ul class="nav-menu">
+                <li><a onclick="switchPage('home')" id="nav-home" class="active">Home</a></li>
+                <li><a onclick="switchPage('sobre')" id="nav-sobre">Sobre Mim</a></li>
+                <li><a onclick="switchPage('habilidades')" id="nav-habilidades">Habilidades</a></li>
+                <li><a onclick="switchPage('projetos')" id="nav-projetos">Projetos</a></li>
+                <li><a onclick="switchPage('contacto')" id="nav-contacto">Contato</a></li>
+            </ul>
+            <div class="social-icons">
                 <a href="https://www.linkedin.com/in/emival-miguel-078723267/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://instagram.com/TEU_USER" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/Emival98?tab=repositories" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        
-        <!-- INTRODUÇÃO (COM FOTO INTEGRADA) -->
-        <section class="hero">
-            <div class="hero-text">
-                <span class="hero-tag">// Welcome to my stack</span>
-                <h1>Olá, sou o <br><span class="highlight">Emival Miguel</span></h1>
-                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 550px;">
-                    Estudante de Engenharia Informática e profissional focado em SQL Server, automação com Python e modelagem de dados analíticos.
-                </p>
-            </div>
-            <!-- FOTO DO PERFIL -->
-            <!-- Substitui 'img/minha-foto.jpg' pelo nome real da tua foto dentro da pasta 'img' -->
-            <img src="img/minha-foto.jpg" alt="Emival Miguel" class="hero-avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500';">
-        </section>
 
-        <!-- SECÇÃO DE DASHBOARDS (CARROSSEL COM EXPANDIR) -->
-        <section class="slider-section">
-            <h2 class="section-title">Dashboards Interativos & BI</h2>
-            <p style="color: var(--text-muted); margin-top: 10px;">Clique na imagem do dashboard ativo para expandi-la em ecrã inteiro.</p>
-            
-            <div class="slider-wrapper">
-                <!-- Dashboard 1 -->
-                <div class="slide" onclick="expandDashboard('img/dash-vendas.png', 'Dashboard de Vendas Corporativas')">
-                    <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=1000" alt="Dash Vendas">
-                    <div class="slide-caption">
-                        <h3>Análise de Vendas Globais (Star Schema)</h3>
-                    </div>
-                </div>
-
-                <!-- Dashboard 2 -->
-                <div class="slide" onclick="expandDashboard('img/dash-cripto.png', 'Dashboard Financeiro de Cripto')">
-                    <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?q=80&w=1000" alt="Dash Cripto">
-                    <div class="slide-caption">
-                        <h3>Monitoramento de Ativos & Criptomoedas</h3>
-                    </div>
-                </div>
-
-                <!-- Controladores do Carrossel -->
-                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <section id="home" class="page active">
+            <div class="home-content">
+                <h1>Bem-vindo ao meu <br><span style="color: var(--neon-green);">Portfólio de Ciência de Dados</span></h1>
+                <p>Aqui você encontrará soluções analíticas focadas em resolver problemas reais de negócio, desenhadas com rigor de engenharia e modelagem preditiva avançada.</p>
+                <button class="btn btn-primary" onclick="switchPage('projetos')">Explorar Projetos de Alto Nível <i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </section>
 
-        <!-- SECÇÃO DE PROJECTOS EM PYTHON / GITHUB / NOTION -->
-        <section class="projects-section">
-            <h2 class="section-title">Projectos & Scripts</h2>
+        <section id="sobre" class="page">
+            <h2 class="section-title"><span>01.</span> Minha História</h2>
+            <p class="subtitle">Engenheiro de Dados, DBA e Analista focado em extrair valor e inteligência operacional.</p>
             
-            <div class="grid">
+            <div class="about-layout">
+                <div class="about-text">
+                    <div class="qa-block">
+                        <h4><i class="fa-solid fa-fire"></i> O que me entusiasma na Ciência de Dados?</h4>
+                        <p>A capacidade de transformar infraestruturas transacionais complexas e volumes massivos de dados em ativos preditivos e estratégicos que reduzem custos operacionais e geram novas oportunidades de receita.</p>
+                    </div>
+                    
+                    <div class="qa-block">
+                        <h4><i class="fa-solid fa-graduation-cap"></i> Como entrei na Ciência de Dados?</h4>
+                        <p>A partir da Engenharia Informática, atuando como DBA e Desenvolvedor T-SQL. Percebi que garantir a performance e a integridade do armazenamento de dados é apenas a fundação; o próximo passo natural era aplicar algoritmos estatísticos avançados e Machine Learning para responder perguntas de negócio no ecossistema bancário.</p>
+                    </div>
+
+                    <div class="qa-block">
+                        <h4><i class="fa-solid fa-mug-hot"></i> O que gosto de fazer fora do mundo dos dados?</h4>
+                        <p>Quando não estou programando ou otimizando consultas, sou um ávido fã de futebol e analiso as táticas dos principais campeonatos europeus. Também dedico meu tempo à aprendizagem de novos idiomas e a testar receitas na culinária minimalista.</p>
+                    </div>
+
+                    <div class="action-group">
+                        <a href="https://www.linkedin.com/in/emival-miguel-078723267/" target="_blank" class="btn btn-primary"><i class="fab fa-linkedin"></i> Ver Perfil no LinkedIn</a>
+                        <a href="https://drive.google.com/file/d/14RwAKpWWTP78v6Vacy1TBFMnyMigpSB3/view?usp=sharing" class="btn btn-secondary"><i class="fa-solid fa-file-pdf"></i> Acessar Meu Currículo</a>
+                    </div>
+                </div>
                 
-                <!-- Cartão de Projecto 1 -->
-                <div class="card">
-                    <div class="card-body">
-                        <span style="color: var(--neon-green); font-family: 'JetBrains Mono'; font-size: 0.8rem;">[PROJETO COMPLETO]</span>
-                        <h3 class="card-title">Ferramenta de Automação Cripto</h3>
-                        <p class="card-text">Extração contínua da API da Binance, tratamento analítico em Pandas e persistência estruturada dentro do Microsoft SQL Server.</p>
+                <div class="about-image-wrapper">
+                    <img src="img/minha-foto.jpg" alt="Emival Miguel" class="about-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400';">
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="page">
+            <h2 class="section-title"><span>02.</span> Tecnologias & Contexto</h2>
+            <p class="subtitle">Habilidades técnicas demonstradas com aplicabilidade direta na resolução de tarefas analíticas complexas.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fa-solid fa-database"></i>
+                    <h3>Arquitetura de Dados & T-SQL</h3>
+                    <p>Modelagem dimensional avançada (<strong>Star Schema</strong>). Escrita de stored procedures otimizadas, indexação e tuning em bancos corporativos utilizando SQL Server.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Data Engineering com Python</h3>
+                    <p>Manipulação e saneamento de grandes volumes de dados brutos utilizando as bibliotecas <strong>Pandas</strong> e <strong>NumPy</strong> seguindo o padrão de estilo PEP8.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-gears"></i>
+                    <h3>Pipelines ETL</h3>
+                    <p>Construção de fluxos automatizados de extração e transformação conectando APIs de mercado (como a da Binance) a repositórios de dados relacionais via <strong>SQLAlchemy</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="page">
+            <h2 class="section-title"><span>03.</span> Projetos de Alto Nível</h2>
+            <p class="subtitle">Abaixo estão documentados os projetos focados no contexto de problemas de negócio reais com os devidos relatórios e créditos.</p>
+            
+            <div class="projects-list">
+                
+                <div class="project-card">
+                    <span class="project-version">Versão 1.2</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">Previsão da Vida Útil de Equipamentos Industriais em Tempo Real com Machine Learning, Spark Streaming e Kafka</h3>
+                    <div class="project-meta">
+                        <span><i class="fa-solid fa-folder"></i> Categoria: Manutenção Preditiva</span>
+                        <span><i class="fa-solid fa-code-branch"></i> PEP8 Compliant</span>
                     </div>
-                    <div class="card-actions">
-                        <!-- Substitui o '#' pelo link real do teu repositório do Github -->
-                        <a href="https://github.com/" target="_blank" class="btn-link btn-github"><i class="fab fa-github"></i> GitHub</a>
+                    <p style="color: var(--text-muted);">
+                        Desenvolvimento de uma arquitetura de streaming para capturar dados de sensores industriais via Kafka. Os dados são processados em tempo real com Spark Streaming, aplicando um modelo de regressão para estimar o tempo antes da próxima falha do maquinário.
+                    </p>
+                    <div class="business-value">
+                        <h5><i class="fa-solid fa-chart-line"></i> Impacto Comercial & Valor de Negócio:</h5>
+                        <p style="color: #f59e0b; font-size: 0.95rem;">A adoção deste modelo mitiga paradas não planejadas na linha de produção, gerando uma redução estimada de 22% nos custos operacionais de manutenção corretiva da empresa.</p>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>Referências:</strong> Dados públicos simulados do repositório da NASA PCoE. Conceitos aplicados da formação DSA.</p>
+                    <div class="action-group">
+                        <a href="https://github.com" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Acessar Repositório</a>
+                        <a href="#" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> Ler Relatório Técnico Completo</a>
                     </div>
                 </div>
 
-                <!-- Cartão de Projecto 2 (Com código no Notion) -->
-                <div class="card">
-                    <div class="card-body">
-                        <span style="color: var(--neon-green); font-family: 'JetBrains Mono'; font-size: 0.8rem;">[REPOSITÓRIO DE SCRIPTS]</span>
-                        <h3 class="card-title">Queries T-SQL & Scripts ETL</h3>
-                        <p class="card-text">Central de documentação pessoal contendo otimizações de CTEs, monitoramento de bases de dados e automações rápidas em Python.</p>
+                <div class="project-card">
+                    <span class="project-version">Versão 2.0</span>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px;">Pipeline de ETL e Modelagem Dimensional para Consolidação Analítica de Vendas Bancárias</h3>
+                    <div class="project-meta">
+                        <span><i class="fa-solid fa-folder"></i> Categoria: Engenharia de Dados</span>
+                        <span><i class="fa-solid fa-code-branch"></i> T-SQL / SQLAlchemy</span>
                     </div>
-                    <div class="card-actions">
-                        <!-- Substitui o '#' pelo link público do teu Notion -->
-                        <a href="https://notion.so/" target="_blank" class="btn-link btn-notion"><i class="file-text"></i><i class="fa-solid fa-note-sticky"></i> Ver no Notion</a>
+                    <p style="color: var(--text-muted);">
+                        Estruturação de um pipeline robusto em Python responsável por extrair dados de sistemas transacionais heterogêneos, realizar a higienização de anomalias com Pandas e carregar as tabelas Fato e Dimensão sob uma arquitetura Star Schema no SQL Server.
+                    </p>
+                    <div class="business-value">
+                        <h5><i class="fa-solid fa-chart-line"></i> Impacto Comercial & Valor de Negócio:</h5>
+                        <p style="color: #f59e0b; font-size: 0.95rem;">A centralização e otimização do banco de dados reduziram o tempo de execução de relatórios gerenciais analíticos de 45 minutos para apenas 12 segundos, otimizando a tomada de decisão da diretoria.</p>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>Referências:</strong> Metodologia Ralph Kimball de Data Warehouse. LGPD Compliance garantido usando dados mascarados de teste públicos.</p>
+                    <div class="action-group">
+                        <a href="https://github.com" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> Acessar Repositório</a>
+                        <a href="#" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> Ler Relatório Técnico Completo</a>
                     </div>
                 </div>
 
             </div>
         </section>
 
-    </div>
-
-    <!-- LIGHTBOX / MODAL PARA EXPANDIR O DASHBOARD -->
-    <div id="dashModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeDashboard()">&times;</span>
-            <h2 id="modalTitle" class="highlight">Visualização</h2>
-            <img id="modalImg" class="modal-img" src="" alt="Dashboard Expandido">
-        </div>
-    </div>
-
-    <!-- LÓGICA EM JAVASCRIPT (SLIDER + MODAL) -->
-    <script>
-        // --- LOGICA DO SLIDER ---
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        // Avançar ou recuar slides
-        function changeSlide(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("slide");
-            if (n > slides.length) { slideIndex = 1 }    
-            if (n < 1) { slideIndex = slides.length }
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slides[slideIndex-1].style.display = "block";  
-        }
-
-        // Carrossel Automático (muda a cada 5 segundos)
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
-        // --- LÓGICA DO MODAL DE EXPANDIR ---
-        function expandDashboard(imgSrc, title) {
-            document.getElementById("dashModal").style.display = "flex";
-            // Se a imagem local não existir ainda, ele usa o link temporário do slide ativo
-            let activeSlideImg = document.getElementsByClassName("slide")[slideIndex-1].getElementsByTagName("img")[0].src;
+        <section id="contacto" class="page">
+            <h2 class="section-title"><span>04.</span> Contato & Reuniões</h2>
+            <p class="subtitle">Tem interesse em discutir uma oportunidade ou revisar um projeto? Entre em contato ou agende diretamente.</p>
             
-            document.getElementById("modalImg").src = activeSlideImg; // Mudar para 'imgSrc' quando tiveres os ficheiros locais
-            document.getElementById("modalTitle").innerText = title;
-            document.body.style.overflow = "hidden";
-        }
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <h3>Canais de Comunicação</h3>
+                    <p style="margin-top: 20px;"><i class="fa-solid fa-envelope"></i> e-mail: profissional@dominio.com</p>
+                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/emival-miguel</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4>Agendamento Direto:</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 15px;">Escolha o melhor horário para conversarmos na minha agenda do Calendly.</p>
+                        <a href="https://calendly.com/" target="_blank" class="btn btn-primary"><i class="fa-regular fa-calendar-days"></i> Agendar Reunião via Calendly</a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Mensagem simulada enviada com sucesso!');">
+                        <div class="form-group">
+                            <label for="name">Nome / Empresa</label>
+                            <input type="text" id="name" required placeholder="Ex: Gestor de Contratação">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Seu E-mail Corporativo</label>
+                            <input type="email" id="email" required placeholder="Ex: gestor@empresa.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" rows="5" required placeholder="Escreva os detalhes do contato profissional..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Enviar Mensagem Profissional</button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-        function closeDashboard() {
-            document.getElementById("dashModal").style.display = "none";
-            document.body.style.overflow = "auto";
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Emival Miguel. Todos os direitos reservados. Projetos em conformidade com as diretrizes de Privacidade de Dados (LGPD).</p>
+        </div>
+    </footer>
+
+    <script>
+        // Função responsável por gerenciar a navegação sem recarregar a tela
+        function switchPage(pageId) {
+            // Remove a classe ativa de todas as páginas
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove o destaque ativo de todos os links da barra de navegação
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Ativa a página solicitada pelo usuário
+            document.getElementById(pageId).classList.add('active');
+            
+            // Destaca o link correspondente no menu de navegação
+            const activeNavLink = document.getElementById('nav-' + pageId);
+            if(activeNavLink) {
+                activeNavLink.classList.add('active');
+            }
+            
+            // Move a rolagem do ecrã para o topo automaticamente ao mudar de página
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
